@@ -33,20 +33,38 @@ namespace ly
 			while (accumulatedTime > targetDeltaTime)
 			{
 				accumulatedTime -= targetDeltaTime;
-				Tick(targetDeltaTime);
-				Render();
+				TickInternal(targetDeltaTime);
+				RenderInternal();
 			}
 			std::cout << "Ticking at FR: " << 1.f / frameDeltaTime << std::endl;
 		}
 	}
 
-	void Application::Tick(float deltaTime)
+	void Application::TickInternal(float deltaTime)
 	{
+		Tick(deltaTime);
+	}
 
+	void Application::RenderInternal()
+	{
+		RenderWindow.clear();
+
+		Render();
+
+		RenderWindow.display();
 	}
 
 	void Application::Render()
 	{
+		sf::RectangleShape rectangle{ sf::Vector2f(100, 100) };
+		rectangle.setFillColor(sf::Color::Red);
+		rectangle.setOrigin(50, 50);
+		rectangle.setPosition(RenderWindow.getSize().x / 2.f, RenderWindow.getSize().y / 2.f);
 
+		RenderWindow.draw(rectangle);
+	}
+
+	void Application::Tick(float deltaTime)
+	{
 	}
 }
