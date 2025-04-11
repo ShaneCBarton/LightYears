@@ -1,6 +1,7 @@
 #include "GameFramework/GameApplication.h"
 #include "framework/Actor.h"
 #include "framework/World.h"
+#include "config.h"
 
 ly::Application* GetApplication()
 {
@@ -15,7 +16,7 @@ namespace ly
 		weak<World> newWorld = LoadWorld<World>();
 		newWorld.lock()->SpawnActor<Actor>();
 		ActorToDestroy = newWorld.lock()->SpawnActor<Actor>();
-		ActorToDestroy.lock()->SetTexture("D:/Repos/LightYears/LightYearsGame/assets/Ships/ship_0005.png");
+		ActorToDestroy.lock()->SetTexture(GetResourceDir() + "/Ships/ship_0005.png");
 		Counter = 0;
 	}
 
