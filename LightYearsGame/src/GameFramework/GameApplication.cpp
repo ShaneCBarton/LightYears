@@ -13,5 +13,19 @@ namespace ly
 	{
 		weak<World> newWorld = LoadWorld<World>();
 		newWorld.lock()->SpawnActor<Actor>();
+		ActorToDestroy = newWorld.lock()->SpawnActor<Actor>();
+		Counter = 0;
 	}
-}
+
+	void GameApplication::Tick(float deltaTime)
+	{
+		Counter += deltaTime;
+		if (Counter > 2.f)
+		{
+			if (!ActorToDestroy.expired())
+			{
+				ActorToDestroy.lock()->Destroy();
+			}
+		}
+	}
+} 
