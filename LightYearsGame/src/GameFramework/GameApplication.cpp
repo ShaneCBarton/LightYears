@@ -10,10 +10,12 @@ ly::Application* GetApplication()
 namespace ly
 {
 	GameApplication::GameApplication()
+		: Application{ 600, 980, "Plain Planes", sf::Style::Titlebar | sf::Style::Close}
 	{
 		weak<World> newWorld = LoadWorld<World>();
 		newWorld.lock()->SpawnActor<Actor>();
 		ActorToDestroy = newWorld.lock()->SpawnActor<Actor>();
+		ActorToDestroy.lock()->SetTexture("D:/Repos/LightYears/LightYearsGame/assets/Ships/ship_0005.png");
 		Counter = 0;
 	}
 

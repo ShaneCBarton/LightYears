@@ -4,13 +4,12 @@
 
 namespace ly
 {
-	Application::Application()
-		: RenderWindow{ sf::VideoMode(1920, 1080), "Light Years" },
-		TargetFrameRate{ 60.f },
-		TickClock{},
-		CurrentWorld{nullptr}
+	Application::Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, sf::Uint32 style)
+		: RenderWindow{ sf::VideoMode(windowWidth, windowHeight), title, style},
+		  TargetFrameRate{ 60.f },
+		  TickClock{},
+		  CurrentWorld{ nullptr }
 	{
-		
 	}
 
 	void Application::Run()
@@ -62,12 +61,10 @@ namespace ly
 
 	void Application::Render()
 	{
-		sf::RectangleShape rectangle{ sf::Vector2f(100, 100) };
-		rectangle.setFillColor(sf::Color::Red);
-		rectangle.setOrigin(50, 50);
-		rectangle.setPosition(RenderWindow.getSize().x / 2.f, RenderWindow.getSize().y / 2.f);
-
-		RenderWindow.draw(rectangle);
+		if (CurrentWorld)
+		{
+			CurrentWorld->Render(RenderWindow);
+		}
 	}
 
 	void Application::Tick(float deltaTime)

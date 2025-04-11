@@ -12,8 +12,8 @@ namespace ly
 		
 		void BeginPlayInternal();
 		void TickInternal(float deltaTime);
-
 		virtual ~World();
+		void Render(sf::RenderWindow& window);
 
 		template <typename ActorType>
 		weak<ActorType> SpawnActor();

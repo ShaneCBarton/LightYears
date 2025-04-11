@@ -1,3 +1,5 @@
+#include <SFML/Graphics.hpp>
+
 #include "framework/World.h"
 #include "framework/Core.h"
 #include "framework/Actor.h"
@@ -39,7 +41,7 @@ namespace ly
 			}
 			else
 			{
-				iter->get()->Tick(deltaTime);
+				iter->get()->TickInternal(deltaTime);
 				iter++;
 			}
 		}
@@ -49,6 +51,14 @@ namespace ly
 
 	World::~World()
 	{
+	}
+
+	void World::Render(sf::RenderWindow& window)
+	{
+		for (auto actor : Actors)
+		{
+			actor->Render(window);
+		}
 	}
 
 	void World::BeginPlay()
